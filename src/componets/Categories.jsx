@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const CATEGORIES = [
     {
@@ -27,9 +27,7 @@ const CATEGORIES = [
     },
 ];
 
-function Categories() {
-    const [activeIndex, setActiveIndex] = useState(0);
-
+function Categories({ categoryId, onClickCategory }) {
     return (
         <div className="categories">
             <ul>
@@ -37,9 +35,9 @@ function Categories() {
                     <li
                         key={item.id}
                         onClick={() => {
-                            setActiveIndex(item.id);
+                            onClickCategory(item.id);
                         }}
-                        className={activeIndex === item.id ? 'active' : ''}>
+                        className={categoryId === item.id ? 'active' : ''}>
                         {item.title}
                     </li>
                 ))}

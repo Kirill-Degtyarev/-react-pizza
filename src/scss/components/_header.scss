@@ -13,8 +13,9 @@
     &__logo {
         display: flex;
 
-        img {
+        svg {
             margin-right: 15px;
+            width: 40px;
         }
 
         h1 {
@@ -23,10 +24,34 @@
             letter-spacing: 1%;
             text-transform: uppercase;
             font-weight: 800;
+            &.title-mobile {
+                display: none;
+            }
         }
 
         p {
             color: #7b7b7b;
         }
+        @media (max-width: 636px) {
+            flex-direction: column;
+            align-items: center;
+            svg {
+                margin-right: 0;
+            }
+            h1 {
+                &.title-mobile {
+                    display: block;
+                }
+                &.title-desktop {
+                    display: none;
+                }
+            }
+            p {
+                display: none;
+            }
+        }
+    }
+    @media (max-width: 636px) {
+        padding: 10px 0px;
     }
 }

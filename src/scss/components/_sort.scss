@@ -2,12 +2,16 @@
 
 .sort {
     position: relative;
+    &-desc {
+        transform: rotate(180deg);
+    }
     &__label {
         display: flex;
         align-items: center;
 
         svg {
             margin-right: 8px;
+            cursor: pointer;
         }
 
         b {
@@ -17,6 +21,8 @@
         span {
             color: $orange;
             border-bottom: 1px dashed $orange;
+            user-select: none;
+            -webkit-user-drag: none;
             cursor: pointer;
         }
     }

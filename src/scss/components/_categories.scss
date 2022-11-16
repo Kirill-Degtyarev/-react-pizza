@@ -1,9 +1,14 @@
 @import '../variables';
 
 .categories {
+    max-width: 75%;
     ul {
         display: flex;
-
+        width: 100%;
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
         li {
             background-color: #f9f9f9;
             padding: 13px 30px;

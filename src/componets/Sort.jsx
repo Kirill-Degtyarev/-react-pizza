@@ -2,24 +2,30 @@ import React, { useState } from 'react';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 
 const SORTS__ITEM = [
-    { id: 0, title: 'популярности' },
-    { id: 1, title: 'цене' },
-    { id: 2, title: 'алфавиту' },
+    { id: 0, title: 'популярности', sortProperty: 'rating' },
+    { id: 1, title: 'цене', sortProperty: 'price' },
+    { id: 2, title: 'алфавиту', sortProperty: 'title' },
 ];
 
-function Sort() {
+function Sort({ sortType, direction, onClickType, onClickDirection }) {
     const [openModal, setOpenModal] = useState(false);
-    const [activeSort, setActiveSort] = useState(0);
+
     return (
         <div className="sort">
             <div className="sort__label">
-                <SvgGenerator id="arrow-top" />
-                <b>Сортировка по:</b>
+                <SvgGenerator
+                    className={direction ? '' : 'sort-desc'}
+                    id="arrow-top"
+                    onClick={() => {
+                        onClickDirection(!direction);
+                    }}
+                />
+                <b>Сортировка&nbsp;по:</b>
                 <span
                     onClick={() => {
                         setOpenModal(!openModal);
                     }}>
-                    {SORTS__ITEM[activeSort].title}
+                    {sortType.title}
                 </span>
             </div>
             {openModal && (
@@ -29,10 +35,10 @@ function Sort() {
                             <li
                                 key={item.id}
                                 onClick={() => {
-                                    setActiveSort(item.id);
+                                    onClickType(item);
                                     setOpenModal(false);
                                 }}
-                                className={activeSort === item.id ? 'active' : ''}>
+                                className={sortType.id === item.id ? 'active' : ''}>
                                 {item.title}
                             </li>
                         ))}

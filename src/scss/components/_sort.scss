@@ -3,7 +3,9 @@
 .sort {
     position: relative;
     &-desc {
-        transform: rotate(180deg);
+        svg {
+            transform: rotate(180deg);
+        }
     }
     &__label {
         display: flex;

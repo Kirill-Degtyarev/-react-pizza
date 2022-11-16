@@ -4,7 +4,6 @@ import Categories from '../componets/Categories';
 import Sort from '../componets/Sort';
 import PizzaSkeleton from '../componets/PizzaBlock/PizzaSkeleton';
 import PizzaBlock from '../componets/PizzaBlock/PizzaBlock';
-import { Logger } from 'sass';
 
 function Home() {
     const [isLoading, setIsLoading] = useState(true);

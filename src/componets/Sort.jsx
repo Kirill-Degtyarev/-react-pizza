@@ -12,15 +12,14 @@ function Sort({ sortType, direction, onClickType, onClickDirection }) {
 
     return (
         <div className="sort">
-            <div className="sort__label">
-                <SvgGenerator
-                    className={direction ? '' : 'sort-desc'}
-                    id="arrow-top"
+            <div className={direction ? 'sort__label' : 'sort__label sort-desc'}>
+                <SvgGenerator id="arrow-top" />
+                <b
                     onClick={() => {
                         onClickDirection(!direction);
-                    }}
-                />
-                <b>Сортировка&nbsp;по:</b>
+                    }}>
+                    Сортировка&nbsp;по:
+                </b>
                 <span
                     onClick={() => {
                         setOpenModal(!openModal);

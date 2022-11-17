@@ -18,6 +18,8 @@
 
         b {
             margin-right: 8px;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         span {

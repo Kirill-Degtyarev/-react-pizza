@@ -1,0 +1,38 @@
+.pag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    li {
+        display: inline-flex;
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #fe5f1e;
+            border-radius: 30px;
+            height: 40px;
+            width: 40px;
+            color: #fe5f1e;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.3s ease all;
+        }
+        &:not(:last-child) {
+            margin-right: 7px;
+        }
+        &:hover {
+            a {
+                background-color: #fe5f1e;
+                color: #fafafa;
+            }
+        }
+    }
+    :global {
+        .selected {
+            a {
+                background-color: #fe5f1e;
+                color: #fafafa;
+            }
+        }
+    }
+}

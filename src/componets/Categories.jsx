@@ -27,7 +27,7 @@ const CATEGORIES = [
     },
 ];
 
-function Categories({ categoryId, onClickCategory }) {
+function Categories({ categoryId, onChangeCategory }) {
     return (
         <div className="categories">
             <ul>
@@ -35,7 +35,7 @@ function Categories({ categoryId, onClickCategory }) {
                     <li
                         key={item.id}
                         onClick={() => {
-                            onClickCategory(item.id);
+                            onChangeCategory(item.id);
                         }}
                         className={categoryId === item.id ? 'active' : ''}>
                         {item.title}

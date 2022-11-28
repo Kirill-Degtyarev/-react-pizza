@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../redux/slices/filterSlice';
 
 const SORTS__ITEM = [
     { id: 0, title: 'популярности', sortProperty: 'rating' },
@@ -7,16 +9,17 @@ const SORTS__ITEM = [
     { id: 2, title: 'алфавиту', sortProperty: 'title' },
 ];
 
-function Sort({ sortType, direction, onClickType, onClickDirection }) {
+function Sort({ onChangeDirection, direction }) {
+    const sort = useSelector((state) => state.filter.sort);
+    const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false);
-
     return (
         <div className="sort">
             <div className={direction ? 'sort__label' : 'sort__label sort-desc'}>
                 <SvgGenerator id="arrow-top" />
                 <b
                     onClick={() => {
-                        onClickDirection(!direction);
+                        onChangeDirection(!direction);
                     }}>
                     Сортировка&nbsp;по:
                 </b>
@@ -24,7 +27,7 @@ function Sort({ sortType, direction, onClickType, onClickDirection }) {
                     onClick={() => {
                         setOpenModal(!openModal);
                     }}>
-                    {sortType.title}
+                    {sort.title}
                 </span>
             </div>
             {openModal && (
@@ -34,10 +37,10 @@ function Sort({ sortType, direction, onClickType, onClickDirection }) {
                             <li
                                 key={item.id}
                                 onClick={() => {
-                                    onClickType(item);
+                                    dispatch(setSort(item));
                                     setOpenModal(false);
                                 }}
-                                className={sortType.id === item.id ? 'active' : ''}>
+                                className={sort.id === item.id ? 'active' : ''}>
                                 {item.title}
                             </li>
                         ))}

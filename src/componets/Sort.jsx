@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { setSort, setPageDirections } from '../redux/slices/filterSlice';
 
-const SORTS__ITEM = [
+export const SORTS__ITEM = [
     { id: 0, title: 'популярности', sortProperty: 'rating' },
     { id: 1, title: 'цене', sortProperty: 'price' },
     { id: 2, title: 'алфавиту', sortProperty: 'title' },
 ];
 
-function Sort({ onChangeDirection, direction }) {
-    const sort = useSelector((state) => state.filter.sort);
+function Sort() {
+    const { sort, direction } = useSelector((state) => state.filter);
     const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false);
+    const sortRef = useRef();
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!e.path.includes(sortRef.current)) {
+                setOpenModal(false);
+            }
+        };
+
+        document.body.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className={direction ? 'sort__label' : 'sort__label sort-desc'}>
                 <SvgGenerator id="arrow-top" />
                 <b
                     onClick={() => {
-                        onChangeDirection(!direction);
+                        dispatch(setPageDirections(!direction));
                     }}>
                     Сортировка&nbsp;по:
                 </b>

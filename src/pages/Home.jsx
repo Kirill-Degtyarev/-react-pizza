@@ -1,6 +1,5 @@
-import React, { useEffect, useContext, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setPageCount, setFilters, selectFilter } from '../redux/slices/filterSlice';
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
@@ -14,14 +13,13 @@ import PizzaBlock from '../componets/PizzaBlock/PizzaBlock';
 import Pagination from '../componets/Pagination';
 
 function Home() {
-    const { categoryId, sort, pageCount, direction } = useSelector(selectFilter);
+    const { categoryId, sort, pageCount, direction, searchValue } = useSelector(selectFilter);
     const { items, status } = useSelector((state) => state.pizzas);
     const sortProperty = sort.sortProperty;
     const dispatch = useDispatch();
     const directions = direction ? 'asc' : 'desc';
     const isSearch = useRef(false);
     const isMounted = useRef(false);
-    const { searchValue } = useContext(SearchContext);
 
     const nav = useNavigate();
 

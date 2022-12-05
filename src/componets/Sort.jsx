@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort, setPageDirections } from '../redux/slices/filterSlice';
+import { setSort, setPageDirections, selectFilter } from '../redux/slices/filterSlice';
 
 export const SORTS__ITEM = [
     { id: 0, title: 'популярности', sortProperty: 'rating' },
@@ -10,7 +10,7 @@ export const SORTS__ITEM = [
 ];
 
 function Sort() {
-    const { sort, direction } = useSelector((state) => state.filter);
+    const { sort, direction } = useSelector(selectFilter);
     const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false);
     const sortRef = useRef();

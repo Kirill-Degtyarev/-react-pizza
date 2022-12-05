@@ -16,11 +16,13 @@ function CartItem({ id, title, imageUrl, type, size, count, price }) {
     };
 
     const onClickMinus = () => {
-        dispatch(
-            minusItem({
-                id: id,
-            }),
-        );
+        if (count !== 1) {
+            dispatch(
+                minusItem({
+                    id: id,
+                }),
+            );
+        }
     };
 
     const onCLickDelete = () => {
@@ -40,7 +42,9 @@ function CartItem({ id, title, imageUrl, type, size, count, price }) {
             </div>
             <div className="cart__item-count">
                 <div
-                    className="button button--outline button--circle cart__item-count-minus"
+                    className={`button button--outline button--circle cart__item-count-minus ${
+                        count === 1 ? 'cart__item-count-disabled' : ''
+                    }`}
                     onClick={onClickMinus}>
                     <SvgGenerator id="minus" />
                 </div>

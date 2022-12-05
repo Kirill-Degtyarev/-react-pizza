@@ -22,7 +22,20 @@ body {
 
 .content {
     padding: 40px 0;
-
+    &__error-info {
+        margin: 60px auto;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        p {
+            font-weight: 20;
+        }
+    }
     &__title {
         font-weight: 800;
         font-size: 38px;
@@ -199,6 +212,24 @@ body {
 
             b {
                 font-size: 22px;
+            }
+            &-disabled {
+                border-color: #dddddd;
+                svg {
+                    path {
+                        fill: #dddddd;
+                    }
+                }
+                &:hover,
+                &:active {
+                    border-color: #dddddd;
+                    background-color: inherit;
+                    svg {
+                        path {
+                            fill: #dddddd;
+                        }
+                    }
+                }
             }
         }
 

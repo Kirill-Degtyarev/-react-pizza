@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectCart } from '../redux/slices/cartSlice';
 
 import Search from './Search';
 
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 
 function Header() {
-    const { totalPrice, items } = useSelector((state) => state.cart);
+    const { totalPrice, items } = useSelector(selectCart);
     const totalCount = items.reduce((sum, item) => sum + item.count, 0);
     return (
         <div className="header">
@@ -25,7 +26,7 @@ function Header() {
                 <Search />
                 <div className="header__cart">
                     <Link to="/cart" className="button button--cart">
-                        <span>{totalPrice} ₽</span>
+                        <span>{totalPrice.toLocaleString()} ₽</span>
                         <div className="button__delimiter"></div>
                         <SvgGenerator id="cart" />
                         <span>{totalCount}</span>

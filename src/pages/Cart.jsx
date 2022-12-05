@@ -2,14 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { clearItems } from '../redux/slices/cartSlice';
+import { clearItems, selectCart } from '../redux/slices/cartSlice';
 
 import CartEmpty from '../componets/CartEmpty';
 import CartItem from '../componets/CartItem';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 
 function Cart() {
-    const { items, totalPrice } = useSelector((state) => state.cart);
+    const { items, totalPrice } = useSelector(selectCart);
     const dispatch = useDispatch();
     const nav = useNavigate();
 
@@ -45,7 +45,7 @@ function Cart() {
                                     Всего пицц: <b>{totalCount} шт.</b>
                                 </span>
                                 <span>
-                                    Сумма заказа: <b>{totalPrice} ₽</b>
+                                    Сумма заказа: <b>{totalPrice.toLocaleString()} ₽</b>
                                 </span>
                             </div>
                             <div className="cart__bottom-buttons">

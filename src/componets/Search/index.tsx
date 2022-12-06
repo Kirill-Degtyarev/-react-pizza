@@ -5,11 +5,11 @@ import debounce from 'lodash.debounce';
 
 import styles from './Search.module.scss';
 
-function Search() {
+const Search: React.FC = () => {
     const dispatch = useDispatch();
     const [value, setValue] = useState('');
 
-    const onChangeInput = (e) => {
+    const onChangeInput = (e: any) => {
         setValue(e.target.value);
         updateSeatchInput(e.target.value);
     };
@@ -30,5 +30,5 @@ function Search() {
             placeholder="Поиск пиццы"
         />
     );
-}
+};
 export default Search;

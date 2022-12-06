@@ -7,13 +7,12 @@ import { clearItems, selectCart } from '../redux/slices/cartSlice';
 import CartEmpty from '../componets/CartEmpty';
 import CartItem from '../componets/CartItem';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
-
-function Cart() {
+const Cart: React.FC = () => {
     const { items, totalPrice } = useSelector(selectCart);
     const dispatch = useDispatch();
     const nav = useNavigate();
 
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
     return (
         <>
@@ -35,7 +34,7 @@ function Cart() {
                             </div>
                         </div>
                         <div className="content__items">
-                            {items.map((item) => (
+                            {items.map((item: any) => (
                                 <CartItem {...item} key={item.id} />
                             ))}
                         </div>
@@ -70,5 +69,5 @@ function Cart() {
             )}
         </>
     );
-}
+};
 export default Cart;

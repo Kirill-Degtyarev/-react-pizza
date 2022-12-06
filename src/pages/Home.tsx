@@ -12,9 +12,9 @@ import PizzaSkeleton from '../componets/PizzaBlock/PizzaSkeleton';
 import PizzaBlock from '../componets/PizzaBlock/PizzaBlock';
 import Pagination from '../componets/Pagination';
 
-function Home() {
+const Home: React.FC = () => {
     const { categoryId, sort, pageCount, direction, searchValue } = useSelector(selectFilter);
-    const { items, status } = useSelector((state) => state.pizzas);
+    const { items, status } = useSelector((state: any) => state.pizzas);
     const sortProperty = sort.sortProperty;
     const dispatch = useDispatch();
     const directions = direction ? 'asc' : 'desc';
@@ -26,7 +26,10 @@ function Home() {
     const getPizzas = useCallback(async () => {
         const category = categoryId !== 0 ? `&category=${categoryId}` : '';
         const search = searchValue ? `&search=${searchValue}` : '';
-        dispatch(fetchPizzas({ category, directions, search, pageCount, sortProperty }));
+        dispatch(
+            //@ts-ignore
+            fetchPizzas({ category, directions, search, pageCount, sortProperty }),
+        );
     }, [categoryId, directions, sortProperty, searchValue, pageCount, dispatch]);
 
     useEffect(() => {
@@ -58,13 +61,17 @@ function Home() {
         isSearch.current = false;
     }, [getPizzas]);
 
-    const onChangeCategory = (id) => {
+    const onChangeCategory = (id: number) => {
         dispatch(setCategoryId(id));
     };
 
     const skeleton = [...new Array(6)].map((_, index) => <PizzaSkeleton key={index} />);
 
-    const pizzaItems = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
+    const pizzaItems = items.map((pizza: any) => (
+        // <Link to={`/pizza/${pizza.id}`} key={pizza.id}>
+        <PizzaBlock key={pizza.id} {...pizza} />
+        // </Link>
+    ));
 
     return (
         <div className="container">
@@ -87,13 +94,13 @@ function Home() {
                     </div>
                     <Pagination
                         currentPage={pageCount}
-                        onChangePage={(number) => {
-                            dispatch(setPageCount(number));
+                        onChangePage={(page: number) => {
+                            dispatch(setPageCount(page));
                         }}
                     />
                 </>
             )}
         </div>
     );
-}
+};
 export default Home;

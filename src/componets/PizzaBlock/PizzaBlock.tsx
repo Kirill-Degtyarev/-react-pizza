@@ -4,8 +4,19 @@ import { addItem } from '../../redux/slices/cartSlice';
 
 import SvgGenerator from '../../SvgGenerator/SvgGenerator';
 
-function PizzaBlock({ id, imageUrl, title, types, sizes, price }) {
-    const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+type PizzaBlockProps = {
+    id: string;
+    imageUrl: string;
+    title: string;
+    types: number[];
+    sizes: number[];
+    price: number;
+};
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, imageUrl, title, types, sizes, price }) => {
+    const cartItem = useSelector((state: any) =>
+        state.cart.items.find((obj: any) => obj.id === id),
+    );
     const dispatch = useDispatch();
 
     const [activeType, setActiveType] = useState(0);
@@ -68,5 +79,5 @@ function PizzaBlock({ id, imageUrl, title, types, sizes, price }) {
             </div>
         </div>
     );
-}
+};
 export default PizzaBlock;

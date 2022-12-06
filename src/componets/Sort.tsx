@@ -3,20 +3,26 @@ import SvgGenerator from '../SvgGenerator/SvgGenerator';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort, setPageDirections, selectFilter } from '../redux/slices/filterSlice';
 
-export const SORTS__ITEM = [
+type SortItem = {
+    id: number;
+    title: string;
+    sortProperty: string;
+};
+
+export const SORTS__ITEM: SortItem[] = [
     { id: 0, title: 'популярности', sortProperty: 'rating' },
     { id: 1, title: 'цене', sortProperty: 'price' },
     { id: 2, title: 'алфавиту', sortProperty: 'title' },
 ];
 
-function Sort() {
+const Sort: React.FC = () => {
     const { sort, direction } = useSelector(selectFilter);
     const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false);
-    const sortRef = useRef();
+    const sortRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleClickOutside = (e) => {
+        const handleClickOutside = (e: any) => {
             if (!e.path.includes(sortRef.current)) {
                 setOpenModal(false);
             }
@@ -65,5 +71,5 @@ function Sort() {
             )}
         </div>
     );
-}
+};
 export default Sort;

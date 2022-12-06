@@ -4,7 +4,17 @@ import { addItem, removeItem } from '../redux/slices/cartSlice';
 import { minusItem } from '../redux/slices/cartSlice';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 
-function CartItem({ id, title, imageUrl, type, size, count, price }) {
+type CartItemProps = {
+    id: string;
+    title: string;
+    imageUrl: string;
+    type: string;
+    size: number;
+    count: number;
+    price: number;
+};
+
+const CartItem: React.FC<CartItemProps> = ({ id, title, imageUrl, type, size, count, price }) => {
     const dispatch = useDispatch();
 
     const onClickPlus = () => {
@@ -65,5 +75,5 @@ function CartItem({ id, title, imageUrl, type, size, count, price }) {
             </div>
         </div>
     );
-}
+};
 export default CartItem;

@@ -12,6 +12,9 @@
 
     &__image {
         width: 260px;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        user-select: none;
     }
 
     &__title {

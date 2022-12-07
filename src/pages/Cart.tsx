@@ -2,11 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { clearItems, selectCart } from '../redux/slices/cartSlice';
+import { selectCart } from '../redux/slices/cart/selectors';
+import { clearItems } from '../redux/slices/cart/slice';
 
 import CartEmpty from '../componets/CartEmpty';
-import CartItem from '../componets/CartItem';
+import CartItemBlock from '../componets/CartItemBlock';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
+
 const Cart: React.FC = () => {
     const { items, totalPrice } = useSelector(selectCart);
     const dispatch = useDispatch();
@@ -35,7 +37,7 @@ const Cart: React.FC = () => {
                         </div>
                         <div className="content__items">
                             {items.map((item: any) => (
-                                <CartItem {...item} key={item.id} />
+                                <CartItemBlock {...item} key={item.id} />
                             ))}
                         </div>
                         <div className="cart__bottom">

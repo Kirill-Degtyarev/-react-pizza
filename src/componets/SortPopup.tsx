@@ -1,29 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort, setPageDirections, selectFilter } from '../redux/slices/filterSlice';
+import { setSort, setPageDirections } from '../redux/slices/filter/slice';
+
+import { selectFilter } from '../redux/slices/filter/selectors';
+import { SortPropertyEnum } from '../redux/slices/filter/types';
 
 type SortItem = {
     id: number;
     title: string;
-    sortProperty: string;
+    sortProperty: SortPropertyEnum;
+};
+
+type PopupClick = MouseEvent & {
+    path: Node[];
 };
 
 export const SORTS__ITEM: SortItem[] = [
-    { id: 0, title: 'популярности', sortProperty: 'rating' },
-    { id: 1, title: 'цене', sortProperty: 'price' },
-    { id: 2, title: 'алфавиту', sortProperty: 'title' },
+    { id: 0, title: 'популярности', sortProperty: SortPropertyEnum.RATING },
+    { id: 1, title: 'цене', sortProperty: SortPropertyEnum.PRICE },
+    { id: 2, title: 'алфавиту', sortProperty: SortPropertyEnum.TITLE },
 ];
 
-const Sort: React.FC = () => {
+const SortPopup: React.FC = () => {
     const { sort, direction } = useSelector(selectFilter);
     const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false);
     const sortRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleClickOutside = (e: any) => {
-            if (!e.path.includes(sortRef.current)) {
+        const handleClickOutside = (e: MouseEvent) => {
+            const _event = e as PopupClick;
+            if (sortRef.current && !_event.path.includes(sortRef.current)) {
                 setOpenModal(false);
             }
         };
@@ -72,4 +80,4 @@ const Sort: React.FC = () => {
         </div>
     );
 };
-export default Sort;
+export default SortPopup;

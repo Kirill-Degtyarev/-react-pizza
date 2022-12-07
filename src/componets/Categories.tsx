@@ -7,7 +7,7 @@ type CategoriesType = {
 
 type CategoriesProps = {
     categoryId: number;
-    onChangeCategory: any;
+    onChangeCategory: (i: number) => void;
 };
 
 const CATEGORIES: CategoriesType[] = [

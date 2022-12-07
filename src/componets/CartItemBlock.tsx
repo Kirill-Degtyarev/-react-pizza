@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addItem, removeItem } from '../redux/slices/cartSlice';
-import { minusItem } from '../redux/slices/cartSlice';
+import { CartItem } from '../redux/slices/cart/types';
+import { addItem, removeItem } from '../redux/slices/cart/slice';
+import { minusItem } from '../redux/slices/cart/slice';
 import SvgGenerator from '../SvgGenerator/SvgGenerator';
 
 type CartItemProps = {
@@ -14,24 +15,24 @@ type CartItemProps = {
     price: number;
 };
 
-const CartItem: React.FC<CartItemProps> = ({ id, title, imageUrl, type, size, count, price }) => {
+const CartItemBlock: React.FC<CartItemProps> = ({
+    id,
+    title,
+    imageUrl,
+    type,
+    size,
+    count,
+    price,
+}) => {
     const dispatch = useDispatch();
 
     const onClickPlus = () => {
-        dispatch(
-            addItem({
-                id: id,
-            }),
-        );
+        dispatch(addItem({ id } as CartItem));
     };
 
     const onClickMinus = () => {
         if (count !== 1) {
-            dispatch(
-                minusItem({
-                    id: id,
-                }),
-            );
+            dispatch(minusItem(id));
         }
     };
 
@@ -76,4 +77,4 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, imageUrl, type, size, co
         </div>
     );
 };
-export default CartItem;
+export default CartItemBlock;

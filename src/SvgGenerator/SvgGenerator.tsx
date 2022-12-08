@@ -1,6 +1,10 @@
 import React from 'react';
 
-function SvgGenerator({ id }) {
+type SvgGeneratorProps = {
+    id: string;
+};
+
+const SvgGenerator: React.FC<SvgGeneratorProps> = ({ id }) => {
     switch (id) {
         case 'cart':
             return (
@@ -294,5 +298,5 @@ function SvgGenerator({ id }) {
         default:
             return <svg width="0" height="0"></svg>;
     }
-}
+};
 export default SvgGenerator;

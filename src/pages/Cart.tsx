@@ -23,7 +23,7 @@ const Cart: React.FC = () => {
                     <div className="cart">
                         <div className="cart__top">
                             <h2 className="content__title">
-                                <SvgGenerator id="basket-black" />
+                                {/* <SvgGenerator id="basket-black" /> */}
                                 Корзина
                             </h2>
                             <div
